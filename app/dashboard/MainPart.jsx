@@ -1,12 +1,15 @@
 "use client"
 import Calculations from "./Calculation"
 import MonthlyExpenses from "./MothlyExpense"
+import { AuthContext } from "@/authContext/AuthContext"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 
 
 
 export default function MainPart() {
+  const { user } = useContext(AuthContext)
+
   const [profile, setProfile] = useState()
   const [expenseItem, setExpenseItem] = useState()
   const [itemCost, setItemCost] = useState()
@@ -14,31 +17,41 @@ export default function MainPart() {
 
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5002/dashboard/guest")   ///Change guest to uid once login is added
-      .then(res => res.json())
-      .then((data)=>{
-        console.log(data)
-        setProfile(data)
-      })
-      .catch(err => alert(err.message))
-  }, [])
+    console.log('useEffect', user)
+    if (user) {
+      console.log('ifUser', user)
+      fetch(`http://127.0.0.1:5002/dashboard/${user.id}`)   ///Change guest to uid once login is added
+        .then(res => res.json())
+        .then((data) => {
+          setProfile(data)
+        })
+        .catch(err => alert(err.message))
+    }
+  }, [user])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const newItem = { 
+    console.log(user)
+    if (!expenseItem || !itemCost) {
+      alert("all field must be filled")
+      return
+    }
+    const newItem = {
       title: expenseItem,
       amount: itemCost,
       expense: true,
       uid: "guest"
     }
 
+
+
     fetch(`http://127.0.0.1:5002/dashboard/guest`, {  ///Change guest to uid once login is added
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(newItem),
-		})
+    	method: "POST",
+    	headers: {
+    		"Content-Type": "application/json",
+    	},
+    	body: JSON.stringify(newItem),
+    })
     .then((res) => res.json())
     .then(setProfile)
     .catch((err) => {
@@ -47,8 +60,8 @@ export default function MainPart() {
     });
     setExpenseItem("");
     setItemCost("");
-    
-      
+
+
   }
 
 
@@ -56,7 +69,7 @@ export default function MainPart() {
 
 
   return (
-    <> 
+    <>
       <section className=" mx-auto w-fit h-fit mt-5 ">
         <form onSubmit={handleSubmit}>
           <input type="text" onChange={(e) => setExpenseItem(e.target.value)} value={expenseItem} name="expense" placeholder="Mothly Expense" className="border-2 border-slate-900 p-1 rounded mx-1 border-opacity-60" />=
@@ -69,20 +82,20 @@ export default function MainPart() {
         <section className="w-[50%]">
           {!profile
             ? <p className="text-slate-900 text-center">loading...</p>
-            : <MonthlyExpenses profile={profile}/>
+            : <MonthlyExpenses profile={profile} />
 
           }
         </section>
-        
+
         <section className="w-[50%]">
           {!profile
             ? <p className="text-slate-900 text-center">loading...</p>
-            : <Calculations profile={profile}/>
+            : <Calculations profile={profile} />
 
           }
         </section>
 
-       
+
 
       </div>
 

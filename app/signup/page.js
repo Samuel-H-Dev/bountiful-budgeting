@@ -1,13 +1,12 @@
 "use client"
 
-
-import { useState, useEffect, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
+import { redirect, useRouter } from "next/navigation"
 import { AuthContext } from "@/authContext/AuthContext"
 
-import { redirect, useRouter } from "next/navigation"
 
 
-export default function Login(){
+export default function signup(){
 
 
     const router = useRouter()
@@ -15,20 +14,18 @@ export default function Login(){
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
   
-    const { handleLogin, user } = useContext(AuthContext)
-
     useEffect(() => {
       if(user){
         redirect("/dashboard")
       }
     },[])
 
-    const handleLoginForm = (e) => {
+    const handleSignupForm = (e) => {
         e.preventDefault()
         const inputedEmail = email;
         const inputedPassword = password
         //now send email and passwod to api
-        fetch('http://127.0.0.1:5002/login',{
+        fetch('http://127.0.0.1:5002/signup',{
           method: "POST",
           headers: {
             "Content-type": "application/json"
@@ -39,20 +36,17 @@ export default function Login(){
         .then(res => res.json())
         //store user and token then handle errors 
         .then(data => {
-          console.log("the data after res.json ", data)
-
           if(data.message){
             setError(data.message)
-            console.log("This is the conditional that we are looking to run for errors ", data.message)
-            return null;
+            return
           }
-          handleLogin(data.user)
+       
+          handleLogin(data)
 
-          
           router.push("/dashboard")
-       })
+        })
+        //if error
         .catch(err => setError(err.message))
- 
       }
 
 
@@ -70,14 +64,14 @@ export default function Login(){
             <p className="text-3xl mt-10 text-center">
                 Welcome.
             </p>
-            <form onSubmit={handleLoginForm} className="flex flex-col pt-3 md:pt-8">
+            <form onSubmit={handleSignupForm} className="flex flex-col pt-3 md:pt-8">
                 <div className="flex flex-col pt-4">
                     <div className="flex relative ">
                         <span className=" inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
                           
                             
                         </span>
-                        <input type="text" onChange={(e) => setEmail(e.target.value)} id="design-login-email" className=" flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Email"/>
+                        <input onChange={(e) => setEmail(e.target.value)} type="text" id="design-signup-email" className=" flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Email"/>
                         </div>
                     </div>
                     <div className="flex flex-col pt-4 mb-12">
@@ -85,7 +79,7 @@ export default function Login(){
                             <span className=" inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
                                
                             </span>
-                            <input onChange={(e) => setPassword(e.target.value)} type="password" id="design-login-password" className=" flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Password"/>
+                            <input onChange={(e) => setPassword(e.target.value)} type="password" id="design-signup-password" className=" flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Password"/>
                             </div>
                             {error && 
               <div classNameName="bg-red-200 border-red-600 text-red-600 border-l-4 p-4 mt-4">

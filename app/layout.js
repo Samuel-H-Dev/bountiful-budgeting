@@ -1,4 +1,4 @@
-import { AuthContext } from '@/context/AuthContext'
+import { AuthProvider } from '@/authContext/AuthContext'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -13,7 +13,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className + " bg-slate-100 " }>
+        <AuthProvider>
+
           {children}
+        </AuthProvider>
         </body>
     </html>
   )
