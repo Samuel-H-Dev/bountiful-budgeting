@@ -1,31 +1,34 @@
 "use client"
+
 import Calculations from "./Calculation"
 import MonthlyExpenses from "./MothlyExpense"
 import { AuthContext } from "@/authContext/AuthContext"
-
+import { redirect, useRouter } from "next/navigation"
 import { useState, useEffect, useContext } from "react"
 
 
 
 export default function MainPart() {
   const { user } = useContext(AuthContext)
-
   const [profile, setProfile] = useState()
   const [expenseItem, setExpenseItem] = useState()
   const [itemCost, setItemCost] = useState()
 
-
+  const Router = useRouter()
 
   useEffect(() => {
     console.log('useEffect', user)
     if (user) {
       console.log('ifUser', user)
-      fetch(`http://127.0.0.1:5002/dashboard/${user.id}`)   ///Change guest to uid once login is added
+      fetch(`http://127.0.0.1:5002/dashboard/${user.id}`)  
         .then(res => res.json())
         .then((data) => {
           setProfile(data)
         })
         .catch(err => alert(err.message))
+    }
+    if (!user){
+      Router.push("/login")
     }
   }, [user])
 

@@ -102,7 +102,7 @@ export default function Login(){
                     <div className="pt-12 pb-12 text-center">
                         <p>
                             Don&#x27;t have an account?
-                            <a href="#" className="font-semibold underline">
+                            <a href="/signup" className="font-semibold underline">
                                 Register here.
                             </a>
                         </p>

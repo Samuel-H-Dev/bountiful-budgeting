@@ -10,9 +10,12 @@ export default function signup(){
 
 
     const router = useRouter()
+    
     const [error, setError] = useState()
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+
+    const { handleLogin, user } = useContext(AuthContext)
   
     useEffect(() => {
       if(user){
@@ -95,9 +98,9 @@ export default function signup(){
                     </form>
                     <div className="pt-12 pb-12 text-center">
                         <p>
-                            Don&#x27;t have an account?
-                            <a href="#" className="font-semibold underline">
-                                Register here.
+                            Alredy a memeber?
+                            <a href="login" className="font-semibold underline">
+                                Login here.
                             </a>
                         </p>
                     </div>
