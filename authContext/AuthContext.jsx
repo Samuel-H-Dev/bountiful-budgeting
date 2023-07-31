@@ -7,38 +7,41 @@ export const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState()
+  const [token, setToken] = useState()
 
   
-    useEffect(() => {
+ 
+       useEffect(() => {
       if(!user){
         //looking to see if user was stored in session data
         const previousUser = sessionStorage.getItem("user")
-        console.log('Session Storage', user)
-        if(previousUser){
-          //if so lets set state back to that user
-          setUser(JSON.parse(previousUser))
+        const previousToken = sessionStorage.getItem("token")
         console.log('Session Storage', user)
 
-        }
+        if(previousUser) setUser(JSON.parse(previousUser))
+        if(previousToken) setToken(previousToken)
       }
     }, [])
 
   const handleLogin = (data) => {
     console.log("data recived by handle login ", data)
-    console.log("data set in user ", JSON.stringify(data))
+    console.log("data set in token ", data.token)
 
-    setUser(JSON.stringify(data))
-    sessionStorage.setItem("user", JSON.stringify(data))
+    setUser(data.user)
+    setToken(data.token)
+    sessionStorage.setItem("user", JSON.stringify(data.user))
+    sessionStorage.setItem("token", data.token)
   }
 
   const handleLogout = () => {
     setUser()
+    setToken()
     sessionStorage.clear()
   }
 
 
   return (
-  <AuthContext.Provider value={{ user, handleLogin, handleLogout }}>
+  <AuthContext.Provider value={{ user, token, handleLogin, handleLogout }}>
     {children}
   </AuthContext.Provider>
 )
