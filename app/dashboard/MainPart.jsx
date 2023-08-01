@@ -10,7 +10,7 @@ import { Modal, Input, Row, Checkbox, Dropdown, Button, Text, Loading } from "@n
 
 
 export default function MainPart() {
-  const { user, token , handleLogout} = useContext(AuthContext)
+  const { user, token, setUser, handleLogout} = useContext(AuthContext)
   const [profile, setProfile] = useState()
   const [expenseItem, setExpenseItem] = useState()
   const [itemCost, setItemCost] = useState()
@@ -64,15 +64,15 @@ export default function MainPart() {
       alert("all field must be filled")
       return
     }
-    let isExpense;
-    if (selected == "Expense") {
-      isExpense = true
-      console.log("its setting it to true", isExpense)
-    }
-    if (selected == "Income") {
-      isExpense = false
-      console.log("its setting it to false", isExpense)
-    }
+    // let isExpense;
+    // if (selected == "Expense") {
+    //   isExpense = true
+    //   console.log("its setting it to true", isExpense)
+    // }
+    // if (selected == "Income") {
+    //   isExpense = false
+    //   console.log("its setting it to false", isExpense)
+    // }
     const newItem = {
       title: expenseItem,
       amount: itemCost,
@@ -107,7 +107,7 @@ export default function MainPart() {
   }
 
  
-  async function deleteEvent(itemID, uid){
+   function deleteEvent(itemID, uid){
     console.log(itemID)
     console.log(uid)
     fetch(`https://bountiful-budgeting-api.web.app/dashboard/${uid}`, {  ///Change guest to uid once login is added
@@ -130,6 +130,32 @@ export default function MainPart() {
       });
   } 
 
+  const updatedIncome = (e) => {
+    e.preventDefault()
+    const  newValue = e.target.updated_income.value
+    const updatedIncome = {
+      monthlyIncome: newValue
+    }
+    console.log(user.id)
+    fetch(`https://bountiful-budgeting-api.web.app/dashboard/${user.id}`, {  ///Change guest to uid once login is added
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token
+
+      },
+      body: JSON.stringify(updatedIncome),
+    })
+      .then((res) => res.json())
+      .then(res => {
+        console.log("info gotten after patch req", res)
+        setUser(res)
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(err.message);
+      });
+  }
 
 
 
@@ -236,7 +262,7 @@ export default function MainPart() {
           ? <Loading color="secondary" type="points" className="w-fit mx-auto h-fit mt-9" textColor="primary" size="xl">Please Wait</Loading>
           : <>
             <section className="overflow-scroll w-[50%]">
-              <MonthlyExpenses user={user} deleteEvent={deleteEvent} profile={profile} />
+              <MonthlyExpenses user={user} updatedIncome={updatedIncome} deleteEvent={deleteEvent} profile={profile} />
 
             </section>
 

@@ -1,5 +1,5 @@
 export default function Calculations({ profile }) {
-  const costs = profile.filter(item => item.expense === true)
+  const costs = profile?.filter(item => item.expense === true)
 
   return (
     <section className="bg-[#71A1FF] w-11/12 min-h-[10%] text-[#051A9A] overflow-y-scroll max-h-[85%] flex flex-wrap flex-row rounded-xl text-xl">
