@@ -163,10 +163,10 @@ export default function MainPart() {
     <>
       <header className=" body-font ">
         <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-          <a className="flex title-font items-center text-gray-950 font-bold mb-4 md:mb-0">
-
+          <div className="flex title-font items-center text-gray-950 font-bold mb-4 md:mb-0">
+            <img src="../../images/Logo.png" className="max-h-10 aspect-auto" />
             <span className="ml-3 text-blue-400 text-3xl opacity-80">Bountiful Budgeting</span>
-          </a>
+          </div>
           <nav className="md:w-[35%]  mx-auto my-2 items-center">
             <Button
               auto
