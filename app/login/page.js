@@ -23,7 +23,7 @@ export default function Login() {
       return
     }
     if (user) {
-      redirect("/dashboard")
+      redirect("/")
     }
   }, [])
 
@@ -53,7 +53,7 @@ export default function Login() {
         handleLogin(data)
 
 
-        router.push("/dashboard")
+        router.push("/")
       })
       .catch(err => setError(err.message))
 

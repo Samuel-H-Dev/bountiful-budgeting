@@ -19,7 +19,7 @@ export default function signup() {
 
   useEffect(() => {
     if (user) {
-      redirect("/dashboard")
+      redirect("/")
     }
   }, [])
 
@@ -46,7 +46,7 @@ export default function signup() {
 
         handleLogin(data)
 
-        router.push("/dashboard")
+        router.push("/")
       })
       //if error
       .catch(err => setError(err.message))

@@ -1,3 +1,4 @@
+
 import { Popover, Spacer, User, Button, Row, Text, Grid, Input } from "@nextui-org/react";
 
 export default function MothlyExpenses({ profile, deleteEvent, updatedIncome, user }) {
@@ -11,10 +12,10 @@ export default function MothlyExpenses({ profile, deleteEvent, updatedIncome, us
     <section className="bg-gradient-to-b from-[#051A9A] pb-2 to-blue-700 w-5/6 text-[#96A6FF] overflow-y-scroll min-h-[10%] max-h-[85%] rounded-xl text-xl">
       <div className="flex flex-wrap flex-row pt-4 pl-3">
         <h2 className=" font-semibold underline pr-2 w-fit">Income: </h2>
-        <p>{!user?.monthlyIncome
+        {!user?.monthlyIncome
           ? <p className="w-fit">No estimated income listed</p>
           : <p>${parseFloat(user.monthlyIncome).toLocaleString()}</p>
-        } </p>
+        } 
 
         <div className="w-fit mr-[12%] mt-4 ml-auto">
           <Popover placement="left">
