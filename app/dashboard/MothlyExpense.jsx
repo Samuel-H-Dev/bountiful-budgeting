@@ -9,7 +9,7 @@ export default function MothlyExpenses({ profile, deleteEvent, updatedIncome, us
   return (
 
 
-    <section className="bg-gradient-to-b from-[#051A9A] pb-2 to-blue-700 w-5/6 text-[#96A6FF] overflow-y-scroll min-h-[10%] max-h-[85%] rounded-xl text-xl">
+    <section className="bg-gradient-to-b from-[#051A9A] pb-2 to-blue-700 w-5/6 text-[#96A6FF] overflow-y-scroll no-scrollbar min-h-[10%] max-h-[75%] rounded-xl text-xl">
       <div className="flex flex-wrap flex-row pt-4 pl-3">
         <h2 className=" font-semibold underline pr-2 w-fit">Income: </h2>
         {!user?.monthlyIncome

@@ -266,7 +266,7 @@ export default function MainPart() {
         {!profile
           ? <Loading color="secondary" type="points" className="w-fit mx-auto h-fit mt-9" textColor="primary" size="xl">Please Wait</Loading>
           : <>
-            <section className="overflow-scroll w-[50%]">
+            <section className="w-[50%]">
               <MonthlyExpenses user={user} updatedIncome={updatedIncome} deleteEvent={deleteEvent} profile={profile} />
 
             </section>

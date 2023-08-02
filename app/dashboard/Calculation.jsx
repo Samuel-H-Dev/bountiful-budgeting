@@ -17,7 +17,7 @@ export default function Calculations({ profile, user }) {
   }, [costs])
 
   return (
-    <section className="bg-[#71A1FF] w-11/12 min-h-[10%] text-[#051A9A] overflow-y-scroll max-h-[85%] flex flex-wrap flex-row rounded-xl text-xl">
+    <section className="bg-[#71A1FF] w-11/12 min-h-[10%] text-[#051A9A] overflow-y-scroll no-scrollbar max-h-[75%] scroll-smooth flex flex-wrap flex-row rounded-xl text-xl">
       <h2 className="pl-3 pt-4 font-semibold w-full underline mb-2">Calculations</h2>
       <div className="w-[45%] pb-2">
         {costs.map((expense) => (

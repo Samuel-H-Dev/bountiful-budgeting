@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className + " bg-[#141a3b]" }>
+      <body className={inter.className + " bg-[#141a3b] no-scrollbar" }>
 
         <AuthProvider>
 
