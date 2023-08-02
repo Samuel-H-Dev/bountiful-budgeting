@@ -13,7 +13,7 @@ export default function MothlyExpenses({ profile, deleteEvent, updatedIncome, us
         <h2 className=" font-semibold underline pr-2 w-fit">Income: </h2>
         <p>{!user?.monthlyIncome
           ? <p className="w-fit">No estimated income listed</p>
-          : <p>{user.monthlyIncome}</p>
+          : <p>${parseFloat(user.monthlyIncome).toLocaleString()}</p>
         } </p>
 
         <div className="w-fit mr-[12%] mt-4 ml-auto">
@@ -23,19 +23,14 @@ export default function MothlyExpenses({ profile, deleteEvent, updatedIncome, us
             </Popover.Trigger>
 
             {/* content of the pop up*/}
-            <Popover.Content  className="px-4 py-1" >
-                   <form onSubmit={updatedIncome}>
-                    <Input  labelLeft="Updated Income" className="mx-auto px-2 py-1 rounded-xl my-4" type="text" name="updated_income"/>
-                  <Grid.Container alignContent="center">
-                
-                  <Popover.Trigger>
-                      <Button type="sumbit" className="mx-auto mb-2" size="sm" shadow color="error">
-                        Update
-                      </Button>
-                      </Popover.Trigger>
-                  </Grid.Container>
-                  </form> 
-             
+            <Popover.Content className="px-4 py-1" >
+              <form onSubmit={updatedIncome}>
+                <Input labelLeft="Updated Income" className="mx-auto px-2 py-1 rounded-xl my-4" type="text" name="updated_income" />
+                  <Button type="sumbit" className="mx-auto mb-2" size="sm" shadow color="error">
+                    Update
+                  </Button>
+              </form>
+
             </Popover.Content>
           </Popover>
         </div>

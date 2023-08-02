@@ -267,7 +267,7 @@ export default function MainPart() {
             </section>
 
             <section className=" w-[50%]">
-              <Calculations profile={profile} />
+              <Calculations profile={profile} user={user}/>
 
             </section>
           </>
