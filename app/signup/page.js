@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useContext, useEffect } from "react"
-import { redirect, useRouter } from "next/navigation"
+import { redirect } from "next/navigation"
 import { AuthContext } from "@/authContext/AuthContext"
 import { Button, Input, Spacer, Text } from "@nextui-org/react"
 
@@ -9,7 +9,6 @@ import { Button, Input, Spacer, Text } from "@nextui-org/react"
 export default function signup() {
 
 
-  const router = useRouter()
 
   const [error, setError] = useState()
   const [email, setEmail] = useState()
@@ -18,10 +17,14 @@ export default function signup() {
   const { handleLogin, user } = useContext(AuthContext)
 
   useEffect(() => {
+    
+    if(!user){
+      return
+    }
     if (user) {
       redirect("/")
     }
-  }, [])
+  }, [user])
 
   const handleSignupForm = (e) => {
     e.preventDefault()
@@ -45,8 +48,6 @@ export default function signup() {
         }
 
         handleLogin(data)
-
-        router.push("/")
       })
       //if error
       .catch(err => setError(err.message))

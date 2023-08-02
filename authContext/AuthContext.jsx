@@ -31,6 +31,7 @@ export function AuthProvider({ children }) {
     setToken(data.token)
     sessionStorage.setItem("user", JSON.stringify(data.user))
     sessionStorage.setItem("token", data.token)
+    
   }
 
   const handleLogout = () => {
@@ -41,7 +42,7 @@ export function AuthProvider({ children }) {
 
 
   return (
-  <AuthContext.Provider value={{ user, token, setUser, handleLogin, handleLogout }}>
+  <AuthContext.Provider value={{ user, token, setUser, setToken, handleLogin, handleLogout }}>
     {children}
   </AuthContext.Provider>
 )

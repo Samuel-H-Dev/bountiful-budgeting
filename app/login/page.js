@@ -4,20 +4,21 @@
 import { useState, useEffect, useContext } from "react"
 import { AuthContext } from "@/authContext/AuthContext"
 import { Button, Spacer, Text, Input } from "@nextui-org/react"
-import { redirect, useRouter } from "next/navigation"
+import { redirect,  } from "next/navigation"
 
 
 export default function Login() {
 
   const { handleLogin, user } = useContext(AuthContext)
 
-  const router = useRouter()
   const [error, setError] = useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
 
+ 
   
   useEffect(() => {
+    console.log(user)
     
     if(!user){
       return
@@ -25,19 +26,17 @@ export default function Login() {
     if (user) {
       redirect("/")
     }
-  }, [])
+  }, [user])
 
   const handleLoginForm = (e) => {
     e.preventDefault()
-    const inputedEmail = email;
-    const inputedPassword = password
     //now send email and passwod to api
     fetch('https://bountiful-budgeting-api.web.app/login', {
       method: "POST",
       headers: {
         "Content-type": "application/json"
       },
-      body: JSON.stringify({ email: inputedEmail, password: inputedPassword })
+      body: JSON.stringify({ email, password })
     })
       //get back user and token
       .then(res => res.json())
@@ -52,8 +51,6 @@ export default function Login() {
         }
         handleLogin(data)
 
-
-        router.push("/")
       })
       .catch(err => setError(err.message))
 

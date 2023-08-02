@@ -31,10 +31,13 @@ export default function Calculations({ profile, user }) {
       </div>
       <div className="w-[45%]">
         <div className="border-b-2 border-slate-900">
-          <p>Mothly Income: ${user?.monthlyIncome}</p>
+          <p>Monthly Income: ${user?.monthlyIncome}</p>
           <p>Total Expenses: ${total}</p>
         </div>
-          <p>Remaining Balence: ${user?.monthlyIncome - total}</p>
+          <p>Remaining Balence: </p>
+            {!user?.monthlyIncome
+          ? <p>Income required</p>
+          : <p> ${user?.monthlyIncome - total}</p>}
       </div>
     </section>
   )

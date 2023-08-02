@@ -3,14 +3,14 @@
 import Calculations from "./Calculation"
 import MonthlyExpenses from "./MothlyExpense"
 import { AuthContext } from "@/authContext/AuthContext"
-import { useRouter } from "next/navigation"
+import { redirect } from "next/navigation"
 import { useState, useEffect, useContext } from "react"
-import { Modal, Input, Row, Checkbox, Dropdown, Button, Text, Loading } from "@nextui-org/react";
+import { Modal, Input, Row, Button, Text, Loading } from "@nextui-org/react";
 
 
 
 export default function MainPart() {
-  const { user, token, setUser, handleLogout} = useContext(AuthContext)
+  const { user, token, setUser, setToken, handleLogout} = useContext(AuthContext)
   const [profile, setProfile] = useState()
   const [expenseItem, setExpenseItem] = useState()
   const [itemCost, setItemCost] = useState()
@@ -18,13 +18,18 @@ export default function MainPart() {
   const [selected, setSelected] = useState("Select One");
 
 
-
-  const Router = useRouter()
-
   useEffect(() => {
-    console.log('useEffect', user)
     if (!user) {
-      Router.push("/login")
+      const previousUser = sessionStorage.getItem("user")
+      const previousToken = sessionStorage.getItem("token")
+      console.log('Session Storage', user)
+
+      if(previousToken) setToken(previousToken)
+      if(previousUser) {
+        setUser(JSON.parse(previousUser))
+      } else {
+        redirect("/login")
+      }
     }
     if (user) {
       console.log('ifUser', user)
