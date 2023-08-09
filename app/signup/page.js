@@ -17,8 +17,8 @@ export default function signup() {
   const { handleLogin, user } = useContext(AuthContext)
 
   useEffect(() => {
-    
-    if(!user){
+
+    if (!user) {
       return
     }
     if (user) {
@@ -64,12 +64,12 @@ export default function signup() {
             <div className="flex justify-center pt-12 md:justify-start md:pl-12 md:-mb-24">
             </div>
             <Text
-             h1
-             size={60}
-             className="text-center"
-             color="#00000095"
-             > Bountiful Budgeting  </Text>
-             <Spacer />
+              h1
+              size={60}
+              className="text-center"
+              color="#00000095"
+            > Bountiful Budgeting  </Text>
+            <Spacer />
             <div className="px-8 pt-8 rounded-lg my-auto bg-cyan-500 bg-opacity-80 mx-auto lg:px-32">
               <p className="text-3xl mx-auto mt-10">
                 Signup
@@ -80,6 +80,7 @@ export default function signup() {
               <form onSubmit={handleSignupForm} className="flex flex-col pt-3">
                 <div className="">
                   <Input
+                    name="email"
                     labelLeft="Email"
                     width="100%"
                     onChange={(e) => setEmail(e.target.value)}
@@ -90,6 +91,7 @@ export default function signup() {
                   <div className="flex  ">
 
                     <Input.Password
+                      name="password"
                       labelLeft="Password"
                       width="100%"
                       onChange={(e) => setPassword(e.target.value)}

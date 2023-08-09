@@ -83,6 +83,7 @@ export default function Login() {
               <form onSubmit={handleLoginForm} className="flex flex-col pt-3">
                 <div className="">
                   <Input
+                    name="email"
                     labelLeft="Email"
                     width="100%"
                     onChange={(e) => setEmail(e.target.value)}
@@ -93,6 +94,7 @@ export default function Login() {
                   <div className="flex  ">
 
                     <Input.Password
+                      name="password"
                       labelLeft="Password"
                       width="100%"
                       onChange={(e) => setPassword(e.target.value)}
