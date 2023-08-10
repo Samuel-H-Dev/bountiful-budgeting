@@ -1,4 +1,5 @@
 # Bountiful Budgeting
+[![alt img text](./public/meta/readme.png)](https://bountiful-budgeting-sh.web.app/)
 
 Bountiful Budgeting is a web application built with Next.js, Tailwind CSS, and Next UI that helps you manage your monthly budget by tracking your estimated income, recurring expenses, and offers user authentication with login and sign-up pages.
 

@@ -34,7 +34,7 @@ export default function Calculations({ profile, user }) {
           <p>Monthly Income: ${user?.monthlyIncome}</p>
           <p>Total Expenses: ${total}</p>
         </div>
-          <p>Remaining Balence: </p>
+          <p>Remaining balance: </p>
             {!user?.monthlyIncome
           ? <p>Income required</p>
           : <p> ${user?.monthlyIncome - total}</p>}
