@@ -10,17 +10,17 @@ export default function MothlyExpenses({ profile, deleteEvent, updatedIncome, us
 
 
     <section className="bg-gradient-to-b from-[#051A9A] pb-2 to-blue-700 w-5/6 text-[#96A6FF] overflow-y-scroll no-scrollbar min-h-[10%] max-h-[75%] rounded-xl text-xl">
-      <div className="flex flex-wrap flex-row pt-4 pl-3">
+      <div className="flex flex-wrap flex-col md:flex-row pt-4 pl-3">
         <h2 className=" font-semibold underline pr-2 w-fit">Income: </h2>
         {!user?.monthlyIncome
           ? <p className="w-fit">No estimated income listed</p>
           : <p>${parseFloat(user.monthlyIncome).toLocaleString()}</p>
         } 
 
-        <div className="w-fit mr-[12%] mt-4 ml-auto">
+        <div className="w-fit mr-[100%] md:mr-[12%] mt-4 ml-auto">
           <Popover placement="left">
             <Popover.Trigger>
-              <Button color="warning" size="xs" auto ghost >Update</Button>
+              <Button className="" color="warning" size="xs" auto ghost >Update</Button>
             </Popover.Trigger>
 
             {/* content of the pop up*/}
@@ -42,15 +42,15 @@ export default function MothlyExpenses({ profile, deleteEvent, updatedIncome, us
       <h2 className="pl-3 font-semibold underline ">Expenses</h2>
       {costs?.map((item) => (
         <div key={item.id} className=" w-11/12  pl-2 border-slate-500 border-b-[1px] py-1 mx-auto my-4">
-          <div className="flex flex-wrap mx-auto flex-row">
-            <p className=" text-lg border-slate-500 border-r-[2px]  w-[40%]">{item.title}</p>
-            <p className=" pl-2 text-lg  w-[40%]">${parseFloat(item.amount).toLocaleString()}</p>
+          <div className="flex flex-wrap mx-auto flex-col md:flex-row">
+            <p className=" text-lg border-slate-500 underline underline-offset-4 md:no-underline md:text-left text-center md:border-r-[2px]  md:w-[40%]">{item.title}</p>
+            <p className=" pl-2 text-lg md:text-left text-center  md:w-[40%]">${parseFloat(item.amount).toLocaleString()}</p>
             <div>
 
 
               <Popover>
                 <Popover.Trigger>
-                  <Button color="error" size="xs" auto flat >Delete</Button>
+                  <Button className="mx-auto md:ml-0 mt-1 mb-2" color="error" size="xs" auto flat >Delete</Button>
                 </Popover.Trigger>
 
                 {/* content of the pop up*/}
